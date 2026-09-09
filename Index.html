@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bellafume | Luxury Eau De Parfum</title>
+  
+  <!-- Google Fonts & Phosphor Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+  <style>
+    /* ==========================
+       THEME & COLOR PALETTE
+    ========================== */
+    :root {
+      --bg-dark: #070609;
+      --bg-card: rgba(20, 17, 26, 0.65);
+      --gold-primary: #d4af37;
+      --gold-light: #f3e5ab;
+      --gold-gradient: linear-gradient(135deg, #f3e5ab 0%, #d4af37 50%, #aa7c11 100%);
+      --pink-accent: #e8819d;
+      --blue-ocean: #0080a8;
+      --text-main: #f8f8fa;
+      --text-muted: #adabba;
+      --glass-border: rgba(212, 175, 55, 0.25);
+      --glass-border-light: rgba(255, 255, 255, 0.1);
+      --font-logo: 'Playfair Display', serif;
+      --font-serif: 'Playfair Display', serif;
+      --font-sans: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      overflow-x: hidden;
+      line-height: 1.6;
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(212, 175, 55, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 90% 70%, rgba(232, 129, 157, 0.06) 0%, transparent 45%),
+        radial-gradient(circle at 50% 90%, rgba(0, 128, 168, 0.08) 0%, transparent 50%);
+      background-attachment: fixed;
+    }
+
+    /* Ambient Animated Glows */
+    .glow-orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(120px);
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .orb-gold {
+      width: 450px;
+      height: 450px;
+      background: rgba(212, 175, 55, 0.12);
+      top: -100px;
+      left: -100px;
+    }
+
+    .orb-blue {
+      width: 500px;
+      height: 500px;
+      background: rgba(0, 128, 168, 0.12);
+      bottom: 10%;
+      right: -100px;
+    }
+
+    /* ==========================
+       REUSABLE GLASS COMPONENTS
+    ========================== */
+    .glass-box {
+      background: var(--bg-card);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border-light);
+      border-radius: 20px;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+    }
+
+    .gold-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px 32px;
+      border-radius: 50px;
+      background: var(--gold-gradient);
+      color: #0d0a03;
+      font-weight: 600;
+      font-size: 0.85rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(212, 175, 55, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .gold-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 30px rgba(212, 175, 55, 0.5);
+    }
+
+    .outline-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px 32px;
+      border-radius: 50px;
+      background: rgba(255, 255, 255, 0.03);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--gold-primary);
+      color: var(--gold-light);
+      font-weight: 500;
+      font-size: 0.85rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .outline-btn:hover {
+      background: rgba(212, 175, 55, 0.15);
+      color: #fff;
+      transform: translateY(-3px);
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .section-title span {
+      color: var(--gold-primary);
+      font-size: 0.8rem;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    .section-title h2 {
+      font-family: var(--font-serif);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 400;
+      letter-spacing: 1px;
+    }
+
+    /* SVG Crown Logo Emblem Component */
+    .brand-crown-logo {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      text-decoration: none;
+    }
+
+    .logo-badge {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid var(--gold-primary);
+      border-radius: 50%;
+      width: 58px;
+      height: 42px;
+      padding: 4px;
+      position: relative;
+    }
+
+    .logo-text-bf {
+      font-family: var(--font-serif);
+      font-weight: 700;
+      color: var(--gold-primary);
+      font-size: 1.1rem;
+      line-height: 1;
+      letter-spacing: 1px;
+    }
+
+    .logo-name {
+      font-family: var(--font-serif);
+      font-style: italic;
+      color: var(--gold-primary);
+      font-size: 1.4rem;
+      margin-top: 2px;
+      letter-spacing: 1px;
+    }
+
+    /* ==========================
+       HEADER / NAVIGATION
+    ========================== */
+    header {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 92%;
+      max-width: 1240px;
+      z-index: 1000;
+      padding: 12px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.3s ease;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 35px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: var(--gold-primary);
+    }
+
+    /* ==========================
+       HERO SECTION
+    ========================== */
+    .hero {
+      min-height: 100vh;
+      padding: 150px 8% 80px;
+      display: flex;
+      align-items: center;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 60px;
+      align-items: center;
+      max-width: 1240px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px;
+      border-radius: 30px;
+      background: rgba(212, 175, 55, 0.1);
+      border: 1px solid var(--glass-border);
+      color: var(--gold-primary);
+      font-size: 0.8rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+
+    .hero-content h1 {
+      font-family: var(--font-serif);
+      font-size: clamp(2.8rem, 5.5vw, 4.5rem);
+      line-height: 1.1;
+      font-weight: 400;
+      margin-bottom: 24px;
+    }
+
+    .hero-content h1 span {
+      background: var(--gold-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-style: italic;
+    }
+
+    .hero-content p {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      margin-bottom: 40px;
+      max-width: 500px;
+    }
+
+    .hero-btn-group {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .hero-showcase {
+      position: relative;
+      display: flex;
+      justify-content: center;
+    }
+
+    .hero-card {
+      padding: 24px;
+      width: 100%;
+      max-width: 440px;
+      border: 1px solid var(--glass-border);
+      position: relative;
+    }
+
+    .hero-img {
+      width: 100%;
+      height: 480px;
+      object-fit: cover;
+      border-radius: 12px;
+      display: block;
+    }
+
+    .hero-badge-overlay {
+      position: absolute;
+      bottom: -15px;
+      left: -15px;
+      padding: 16px 24px;
+      border: 1px solid var(--glass-border);
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .hero-badge-overlay i {
+      font-size: 2rem;
+      color: var(--gold-primary);
+    }
+
+    /* ==========================
+       PRODUCT COLLECTION
+    ========================== */
+    .collection {
+      padding: 100px 8%;
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 40px;
+    }
+
+    .product-card {
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      transition: all 0.4s ease;
+    }
+
+    .product-card:hover {
+      transform: translateY(-8px);
+      border-color: var(--gold-primary);
+    }
+
+    .product-img-holder {
+      width: 100%;
+      height: 320px;
+      border-radius: 14px;
+      overflow: hidden;
+      margin-bottom: 20px;
+      position: relative;
+      background: #0d0a10;
+    }
+
+    .product-img-holder img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+
+    .product-card:hover .product-img-holder img {
+      transform: scale(1.08);
+    }
+
+    .vol-badge {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      padding: 4px 12px;
+      border-radius: 20px;
+      background: rgba(7, 6, 9, 0.8);
+      border: 1px solid var(--glass-border);
+      color: var(--gold-light);
+      font-size: 0.75rem;
+      letter-spacing: 1px;
+    }
+
+    .product-title {
+      font-family: var(--font-serif);
+      font-size: 1.6rem;
+      margin-bottom: 6px;
+    }
+
+    .product-desc {
+      color: var(--text-muted);
+      font-size: 0.88rem;
+      margin-bottom: 20px;
+      flex-grow: 1;
+    }
+
+    .product-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 15px;
+      border-top: 1px solid var(--glass-border-light);
+    }
+
+    .product-price {
+      font-family: var(--font-serif);
+      font-size: 1.3rem;
+      color: var(--gold-primary);
+    }
+
+    /* Ocean Kiss Special Theme Accents */
+    .theme-ocean {
+      border-color: rgba(0, 128, 168, 0.3);
+    }
+    .theme-ocean .vol-badge {
+      color: #5edfff;
+      border-color: rgba(0, 128, 168, 0.5);
+    }
+
+    /* Bold Bliss Special Theme Accents */
+    .theme-bliss {
+      border-color: rgba(232, 129, 157, 0.3);
+    }
+    .theme-bliss .vol-badge {
+      color: var(--pink-accent);
+      border-color: rgba(232, 129, 157, 0.5);
+    }
+
+    /* ==========================
+       FRAGRANCE CRAFT & NOTES
+    ========================== */
+    .notes-section {
+      padding: 100px 8%;
+      max-width: 1240px;
+      margin: 0 auto;
+    }
+
+    .notes-wrapper {
+      padding: 60px 40px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+      align-items: center;
+    }
+
+    .notes-list {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .note-item {
+      padding: 20px 24px;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--glass-border-light);
+      transition: all 0.3s ease;
+    }
+
+    .note-item:hover {
+      border-color: var(--gold-primary);
+      background: rgba(212, 175, 55, 0.05);
+      transform: translateX(6px);
+    }
+
+    .note-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 6px;
+    }
+
+    .note-title {
+      font-family: var(--font-serif);
+      color: var(--gold-primary);
+      font-size: 1.1rem;
+    }
+
+    .note-time {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    /* ==========================
+       BRAND HERITAGE / ABOUT
+    ========================== */
+    .heritage {
+      padding: 100px 8%;
+      max-width: 1240px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .heritage-card {
+      padding: 80px 40px;
+    }
+
+    .heritage-card h2 {
+      font-family: var(--font-serif);
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
+
+    .heritage-card p {
+      max-width: 720px;
+      margin: 0 auto 40px;
+      color: var(--text-muted);
+      font-size: 1.05rem;
+    }
+
+    .badge-specs {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+      max-width: 800px;
+      margin: 0 auto;
+      padding-top: 40px;
+      border-top: 1px solid var(--glass-border-light);
+    }
+
+    .spec-item h4 {
+      font-family: var(--font-serif);
+      color: var(--gold-primary);
+      font-size: 1.8rem;
+      margin-bottom: 4px;
+    }
+
+    .spec-item p {
+      font-size: 0.8rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin: 0;
+    }
+
+    /* ==========================
+       FOOTER & MODAL
+    ========================== */
+    footer {
+      padding: 80px 8% 40px;
+      max-width: 1240px;
+      margin: 0 auto;
+    }
+
+    .footer-inner {
+      padding: 60px 40px 30px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 60px;
+      margin-bottom: 60px;
+    }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 30px;
+      border-top: 1px solid var(--glass-border-light);
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    /* Modal Overlay */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(7, 6, 9, 0.85);
+      backdrop-filter: blur(15px);
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .modal-card {
+      width: 90%;
+      max-width: 480px;
+      padding: 40px;
+      position: relative;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+      text-align: left;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold-primary);
+      margin-bottom: 8px;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 14px 18px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--glass-border-light);
+      border-radius: 10px;
+      color: #fff;
+      outline: none;
+    }
+
+    .form-input:focus {
+      border-color: var(--gold-primary);
+    }
+
+    /* RESPONSIVE BREAKPOINTS */
+    @media (max-width: 992px) {
+      .hero-grid, .notes-wrapper, .footer-grid {
+        grid-template-columns: 1fr;
+      }
+      .hero { text-align: center; }
+      .hero-content p { margin: 0 auto 40px; }
+      .hero-btn-group { justify-content: center; }
+      .badge-specs { grid-template-columns: 1fr; gap: 20px; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Ambient Light Orbs -->
+  <div class="glow-orb orb-gold"></div>
+  <div class="glow-orb orb-blue"></div>
+
+  <!-- HEADER / NAVIGATION -->
+  <header class="glass-box">
+    <!-- Official Bellafume Logo Emblem -->
+    <a href="#" class="brand-crown-logo">
+      <div class="logo-badge">
+        <i class="ph ph-crown-simple" style="color: var(--gold-primary); font-size: 1.1rem; line-height: 1;"></i>
+        <div class="logo-text-bf">B&bull;F</div>
+      </div>
+      <div class="logo-name">Bellafume</div>
+    </a>
+
+    <nav>
+      <ul class="nav-links">
+        <li><a href="#collection">Collection</a></li>
+        <li><a href="#notes">Notes</a></li>
+        <li><a href="#heritage">Heritage</a></li>
+      </ul>
+    </nav>
+
+    <button class="gold-btn" onclick="openModal('General Inquiry')" style="padding: 10px 22px; font-size: 0.75rem;">
+      Inquire
+    </button>
+  </header>
+
+  <main>
+    <!-- HERO SECTION -->
+    <section class="hero">
+      <div class="hero-grid">
+        <div class="hero-content">
+          <div class="hero-tag">
+            <i class="ph ph-sparkle"></i> Haute Parfumerie
+          </div>
+          <h1>Crafted for the <span>Extraordinary.</span></h1>
+          <p>Discover Bellafume's signature range of Eau De Parfum. From coastal tranquility to vibrant spicy accords, immerse yourself in regal scent craftsmanship.</p>
+          
+          <div class="hero-btn-group">
+            <a href="#collection" class="gold-btn">Explore Range <i class="ph ph-arrow-right"></i></a>
+            <button class="outline-btn" onclick="openModal('Discovery Set')">Sample Box</button>
+          </div>
+        </div>
+
+        <div class="hero-showcase">
+          <div class="hero-card glass-box">
+            <!-- Reference Product Image -->
+            <img src="perfume_hero.png" alt="Bellafume Eau De Parfum" class="hero-img">
+            
+            <div class="hero-badge-overlay glass-box">
+              <i class="ph ph-seal-check"></i>
+              <div style="text-align: left;">
+                <p style="font-size: 0.75rem; color: var(--gold-primary); margin:0;">Certified Luxury</p>
+                <p style="font-size: 0.9rem; font-weight: 600; margin:0; font-family: var(--font-serif);">Gold Leafing Series</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FRAGRANCE COLLECTION -->
+    <section class="collection" id="collection">
+      <div class="section-title">
+        <span>The Signature Editions</span>
+        <h2>Curated Fragrance Collection</h2>
+      </div>
+
+      <div class="product-grid">
+        <!-- Product 1: Ocean's Kiss -->
+        <div class="product-card glass-box theme-ocean">
+          <div class="product-img-holder">
+            <span class="vol-badge">20 ml Eau De Parfum</span>
+            <img src="https://images.unsplash.com/photo-1523293182086-7651a899d37f?auto=format&fit=crop&w=600&q=80" alt="Ocean's Kiss Fragrance">
+          </div>
+          <h3 class="product-title">Ocean’s Kiss</h3>
+          <p class="product-desc">An invigorating embrace capturing the essence of a coastal ocean breeze. Bursts of freshness designed to revitalize your spirit.</p>
+          <div class="product-footer">
+            <span class="product-price">₹1,299</span>
+            <button class="outline-btn" onclick="openModal('Ocean\'s Kiss 20ml')" style="padding: 8px 18px; font-size: 0.75rem;">Order Now</button>
+          </div>
+        </div>
+
+        <!-- Product 2: Bold Bliss -->
+        <div class="product-card glass-box theme-bliss">
+          <div class="product-img-holder">
+            <span class="vol-badge">100 ml Eau De Parfum</span>
+            <img src="https://images.unsplash.com/photo-1588405748880-12d1d2a59f75?auto=format&fit=crop&w=600&q=80" alt="Bold Bliss Fragrance">
+          </div>
+          <h3 class="product-title">Bold Bliss</h3>
+          <p class="product-desc">Bursts forth with a vibrant citrus opening, quickly giving way to a spicy, fruity heart. Silver Leafing edition for an alluring presence.</p>
+          <div class="product-footer">
+            <span class="product-price">₹2,899</span>
+            <button class="outline-btn" onclick="openModal('Bold Bliss 100ml')" style="padding: 8px 18px; font-size: 0.75rem;">Order Now</button>
+          </div>
+        </div>
+
+        <!-- Product 3: Royal Amber -->
+        <div class="product-card glass-box">
+          <div class="product-img-holder">
+            <span class="vol-badge">100 ml Eau De Parfum</span>
+            <img src="https://images.unsplash.com/photo-1547887537-6158d64c35b3?auto=format&fit=crop&w=600&q=80" alt="Royal Amber Gold Edition">
+          </div>
+          <h3 class="product-title">Royal Amber</h3>
+          <p class="product-desc">Rich amber accords fused with warm exotic woods and subtle vanilla undertones. Housed in Bellafume’s signature Gold Leafing bottle.</p>
+          <div class="product-footer">
+            <span class="product-price">₹3,499</span>
+            <button class="outline-btn" onclick="openModal('Royal Amber 100ml')" style="padding: 8px 18px; font-size: 0.75rem;">Order Now</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- OLFACTORY NOTES -->
+    <section class="notes-section" id="notes">
+      <div class="notes-wrapper glass-box">
+        <div>
+          <div style="color: var(--gold-primary); font-size: 0.8rem; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 10px;">Fragrance Architecture</div>
+          <h2 style="font-family: var(--font-serif); font-size: 2.2rem; margin-bottom: 20px;">Mastery in Every Drop</h2>
+          <p style="color: var(--text-muted); margin-bottom: 30px;">Bellafume fragrances are formulated with high-concentration perfume oils, unfolding gracefully throughout the day across distinct stages.</p>
+          <button class="gold-btn" onclick="openModal('Consultation')">Request Scent Guide</button>
+        </div>
+
+        <div class="notes-list">
+          <div class="note-item">
+            <div class="note-header">
+              <span class="note-title">Top Notes</span>
+              <span class="note-time">Initial Burst</span>
+            </div>
+            <p style="color: var(--text-muted); font-size: 0.85rem;">Fresh Citrus, Aquatic Mist & Bergamot for an invigorating welcome.</p>
+          </div>
+
+          <div class="note-item">
+            <div class="note-header">
+              <span class="note-title">Heart Notes</span>
+              <span class="note-time">Core Essence</span>
+            </div>
+            <p style="color: var(--text-muted); font-size: 0.85rem;">Spicy Botanical Blends, Fruity Accords & Wild Jasmine.</p>
+          </div>
+
+          <div class="note-item">
+            <div class="note-header">
+              <span class="note-title">Base Notes</span>
+              <span class="note-time">Long Lasting</span>
+            </div>
+            <p style="color: var(--text-muted); font-size: 0.85rem;">Deep Amber, Sandalwood, Bourbon Vanilla & Rare Musks.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- HERITAGE / QUALITY -->
+    <section class="heritage" id="heritage">
+      <div class="heritage-card glass-box">
+        <h2>The Bellafume Promise</h2>
+        <p>Manufactured and packed in India with strict global standards. Each bottle carries the mark of exquisite formulation, using premium denatured alcohol and quality essential oil blends.</p>
+
+        <div class="badge-specs">
+          <div class="spec-item">
+            <h4>82% v/v</h4>
+            <p>Perfume Oil Content</p>
+          </div>
+          <div class="spec-item">
+            <h4>36 Months</h4>
+            <p>Shelf Life Quality</p>
+          </div>
+          <div class="spec-item">
+            <h4>Premium</h4>
+            <p>Gold & Silver Leafing</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner glass-box">
+      <div class="footer-grid">
+        <div>
+          <a href="#" class="brand-crown-logo" style="align-items: flex-start;">
+            <div class="logo-badge">
+              <i class="ph ph-crown-simple" style="color: var(--gold-primary); font-size: 1.1rem; line-height: 1;"></i>
+              <div class="logo-text-bf">B&bull;F</div>
+            </div>
+            <div class="logo-name">Bellafume</div>
+          </a>
+          <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 15px; max-width: 300px;">
+            Bellafume Fragrances<br>
+            626/1, Sector 5, Gurugram – 122001, Haryana, India.
+          </p>
+        </div>
+
+        <div>
+          <h4 style="color: var(--gold-primary); font-family: var(--font-serif); margin-bottom: 20px;">Quick Links</h4>
+          <ul style="list-style: none; color: var(--text-muted); font-size: 0.88rem; line-height: 2;">
+            <li><a href="#collection" style="color: inherit; text-decoration: none;">Our Perfumes</a></li>
+            <li><a href="#notes" style="color: inherit; text-decoration: none;">Fragrance Notes</a></li>
+            <li><a href="#heritage" style="color: inherit; text-decoration: none;">Quality Assurance</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 style="color: var(--gold-primary); font-family: var(--font-serif); margin-bottom: 20px;">Contact Care</h4>
+          <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.8;">
+            Tel: +91-99104-79604<br>
+            Email: care@bellafume.com<br>
+            Web: www.bellafume.com
+          </p>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 Bellafume Fragrances. All rights reserved.</p>
+        <div style="display: flex; gap: 15px; font-size: 1.2rem;">
+          <a href="#" style="color: var(--text-main);"><i class="ph ph-instagram-logo"></i></a>
+          <a href="#" style="color: var(--text-main);"><i class="ph ph-facebook-logo"></i></a>
+          <a href="#" style="color: var(--text-main);"><i class="ph ph-whatsapp-logo"></i></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- MODAL DIALOG -->
+  <div class="modal-overlay" id="orderModal">
+    <div class="modal-card glass-box">
+      <button class="close-btn" onclick="closeModal()"><i class="ph ph-x"></i></button>
+      <h3 style="font-family: var(--font-serif); font-size: 1.8rem; margin-bottom: 8px;" id="modalTitle">Inquire / Pre-Order</h3>
+      <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 24px;">Please fill in your details and our customer care team will reach out promptly.</p>
+
+      <form onsubmit="handleSubmit(event)">
+        <div class="form-group">
+          <label for="pName">Your Name</label>
+          <input type="text" id="pName" class="form-input" placeholder="Full Name" required>
+        </div>
+        <div class="form-group">
+          <label for="pContact">Phone / Email</label>
+          <input type="text" id="pContact" class="form-input" placeholder="+91 98765 43210 or email" required>
+        </div>
+        <div class="form-group">
+          <label for="pSelection">Selected Product</label>
+          <input type="text" id="pSelection" class="form-input" value="Ocean's Kiss 20ml">
+        </div>
+        <button type="submit" class="gold-btn" style="width: 100%; margin-top: 10px;">Submit Order Request</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- JAVASCRIPT LOGIC -->
+  <script>
+    function openModal(item = '') {
+      const modal = document.getElementById('orderModal');
+      const selectionInput = document.getElementById('pSelection');
+      if (item) selectionInput.value = item;
+      modal.classList.add('active');
+    }
+
+    function closeModal() {
+      document.getElementById('orderModal').classList.remove('active');
+    }
+
+    document.getElementById('orderModal').addEventListener('click', (e) => {
+      if (e.target === document.getElementById('orderModal')) closeModal();
+    });
+
+    function handleSubmit(e) {
+      e.preventDefault();
+      alert('Thank you for contacting Bellafume Care! We will process your order request shortly.');
+      closeModal();
+    }
+  </script>
+</body>
+</html>
